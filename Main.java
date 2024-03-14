@@ -2,13 +2,31 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
+
         System.out.println("Введите строку:");
-        String input = scanner.nextLine();
+        String str = input.nextLine();
 
-        input = input.replace("кака", "вырезано цензурой");
-        input = input.replace("бяка", "вырезано цензурой");
+        System.out.println("Введите подстроку:");
+        String substr = input.nextLine();
 
-        System.out.println("Результат замены: " + input);
+        int count = countSubstring(str, substr);
+
+        System.out.println("Подстрока встречается " + count + " раз");
+    }
+
+    public static int countSubstring(String str, String substr) {
+        int lastIndex = 0;
+        int count = 0;
+
+        while (lastIndex != -1) {
+            lastIndex = str.indexOf(substr, lastIndex);
+            if (lastIndex != -1) {
+                count++;
+                lastIndex += substr.length();
+            }
+        }
+
+        return count;
     }
 }
